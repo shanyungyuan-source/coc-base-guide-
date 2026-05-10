@@ -1,0 +1,76 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  tags?: string[];
+  image?: string;
+  slug: string;
+}
+
+const { title, description, date, tags = [], image, slug } = Astro.props;
+const siteName = 'COC Base Guide';
+const fullTitle = `${title} | ${siteName}`;
+const publishDate = date.toISOString();
+const formattedDate = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout
+  title={fullTitle}
+  description={description}
+  ogImage={image}
+  type="article"
+  publishDate={publishDate}
+>
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="site-logo">
+        <span class="logo-icon">⚔️</span>
+        <span class="logo-text">
+          COC Base Guide
+          <span class="logo-sub">Clash of Clans Strategy</span>
+        </span>
+      </a>
+      <nav class="site-nav">
+        <a href="/">Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <article class="article-page">
+        <a href="/" class="back-btn">← Back to all guides</a>
+
+        <header class="article-header">
+          <div class="article-meta">
+            <span class="card-date">📅 {formattedDate}</span>
+            {tags.length > 0 && (
+              <div class="tags">
+                {tags.map(tag => <span class="tag">{tag}</span>)}
+              </div>
+            )}
+          </div>
+          <h1 class="article-title">{title}</h1>
+          <p class="article-desc">{description}</p>
+        </header>
+
+        <div class="prose">
+          <slot />
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© {new Date().getFullYear()} COC Base Guide · <a href="/sitemap-index.xml">Sitemap</a></p>
+    </div>
+  </footer>
+</BaseLayout>

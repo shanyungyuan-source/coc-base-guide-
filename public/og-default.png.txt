@@ -1,0 +1,2 @@
+Place a 1200x630 PNG here named og-default.png for the default Open Graph image.
+This placeholder file can be deleted.

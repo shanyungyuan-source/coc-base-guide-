@@ -1,0 +1,80 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const articles = (await getCollection('articles')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+
+const siteName = 'COC Base Guide';
+const siteDesc = 'Expert Clash of Clans base layouts and attack strategies for every Town Hall level. Trophy bases, war bases, farming bases, and more.';
+---
+
+<BaseLayout title={siteName} description={siteDesc}>
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="site-logo">
+        <span class="logo-icon">⚔️</span>
+        <span class="logo-text">
+          COC Base Guide
+          <span class="logo-sub">Clash of Clans Strategy</span>
+        </span>
+      </a>
+      <nav class="site-nav">
+        <a href="/" class="active">Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section class="hero">
+        <h1>⚔️ COC Base Guide</h1>
+        <p>Expert base layouts and attack strategies to dominate every battle</p>
+      </section>
+
+      <section>
+        <p class="section-title">📋 All Guides ({articles.length})</p>
+
+        {articles.length === 0 ? (
+          <div class="empty">
+            <p>No articles yet. Add Markdown files to <code>src/content/articles/</code> to get started.</p>
+          </div>
+        ) : (
+          <div class="article-grid">
+            {articles.map(article => {
+              const date = article.data.date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              });
+              return (
+                <a href={`/articles/${article.slug}`} class="article-card">
+                  <div class="card-title">{article.data.title}</div>
+                  <div class="card-desc">{article.data.description}</div>
+                  <div class="card-meta">
+                    <span class="card-date">📅 {date}</span>
+                    {article.data.tags && article.data.tags.length > 0 && (
+                      <div class="tags">
+                        {article.data.tags.slice(0, 3).map(tag => (
+                          <span class="tag">{tag}</span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  <span class="card-arrow">Read guide →</span>
+                </a>
+              );
+            })}
+          </div>
+        )}
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© {new Date().getFullYear()} COC Base Guide · <a href="/sitemap-index.xml">Sitemap</a></p>
+    </div>
+  </footer>
+</BaseLayout>
