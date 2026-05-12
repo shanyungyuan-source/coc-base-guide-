@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Privacy Policy | COC Base Guide';
+const description = 'Privacy Policy for COC Base Guide — how we collect, use, and protect your information.';
+---
+
+<BaseLayout title={title} description={description}>
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="site-logo">
+        <span class="logo-icon">⚔️</span>
+        <span class="logo-text">
+          COC Base Guide
+          <span class="logo-sub">Clash of Clans Strategy</span>
+        </span>
+      </a>
+      <nav class="site-nav">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <article class="article-page">
+        <a href="/" class="back-btn">← Back to home</a>
+
+        <header class="article-header">
+          <h1 class="article-title">Privacy Policy</h1>
+          <p class="article-desc">Last updated: January 1, 2026</p>
+        </header>
+
+        <div class="prose">
+          <p>Welcome to COC Base Guide ("we", "our", or "us"). This Privacy Policy explains how we handle information when you visit <strong>coc-base-guide.vercel.app</strong>.</p>
+
+          <h2>1. Information We Collect</h2>
+          <p>We do not collect any personally identifiable information. When you visit our website, we may automatically collect limited technical data including:</p>
+          <ul>
+            <li>Browser type and version</li>
+            <li>Pages visited and time spent on pages</li>
+            <li>Referring website</li>
+            <li>General geographic location (country/region level)</li>
+          </ul>
+          <p>This data is collected in aggregate form through standard web analytics and is not linked to any individual user.</p>
+
+          <h2>2. Cookies</h2>
+          <p>Our website may use minimal cookies necessary for basic site functionality and analytics. We do not use cookies for advertising or tracking purposes. You can disable cookies in your browser settings without affecting your ability to read our content.</p>
+
+          <h2>3. Third-Party Services</h2>
+          <p>We may use the following third-party services:</p>
+          <ul>
+            <li><strong>Vercel</strong> — website hosting. Vercel may collect server logs including IP addresses. See <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">Vercel's Privacy Policy</a>.</li>
+            <li><strong>Google Analytics</strong> (if enabled) — anonymous usage statistics. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a>.</li>
+          </ul>
+
+          <h2>4. How We Use Information</h2>
+          <p>Any data we collect is used solely to:</p>
+          <ul>
+            <li>Understand how visitors use our site so we can improve content</li>
+            <li>Monitor site performance and fix technical issues</li>
+          </ul>
+          <p>We do not sell, rent, or share any data with third parties for marketing purposes.</p>
+
+          <h2>5. Children's Privacy</h2>
+          <p>Our website is intended for general audiences. We do not knowingly collect personal information from children under 13. If you believe a child has provided us with personal information, please contact us and we will delete it promptly.</p>
+
+          <h2>6. External Links</h2>
+          <p>Our articles may contain links to third-party websites (such as Clash Ninja or CocBase). We are not responsible for the privacy practices of those sites and encourage you to review their privacy policies.</p>
+
+          <h2>7. Data Security</h2>
+          <p>We take reasonable measures to protect the limited information we collect. As a static content website, we do not store user accounts, passwords, or payment information.</p>
+
+          <h2>8. Changes to This Policy</h2>
+          <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated date. Continued use of the site after changes constitutes acceptance of the updated policy.</p>
+
+          <h2>9. Contact Us</h2>
+          <p>If you have any questions about this Privacy Policy, please reach out via our <a href="/about">About page</a>.</p>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© {new Date().getFullYear()} COC Base Guide · <a href="/privacy-policy">Privacy Policy</a> · <a href="/about">About</a> · <a href="/sitemap-index.xml">Sitemap</a></p>
+    </div>
+  </footer>
+</BaseLayout>

@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'About | COC Base Guide';
+const description = 'Learn about COC Base Guide — your go-to resource for Clash of Clans base layouts and attack strategies for every Town Hall level.';
+---
+
+<BaseLayout title={title} description={description}>
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="site-logo">
+        <span class="logo-icon">⚔️</span>
+        <span class="logo-text">
+          COC Base Guide
+          <span class="logo-sub">Clash of Clans Strategy</span>
+        </span>
+      </a>
+      <nav class="site-nav">
+        <a href="/">Home</a>
+        <a href="/about" class="active">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <article class="article-page">
+        <a href="/" class="back-btn">← Back to home</a>
+
+        <header class="article-header">
+          <h1 class="article-title">About COC Base Guide</h1>
+          <p class="article-desc">Your go-to resource for Clash of Clans base layouts and attack strategies.</p>
+        </header>
+
+        <div class="prose">
+          <h2>What Is COC Base Guide?</h2>
+          <p>COC Base Guide is a free, ad-light resource dedicated to helping Clash of Clans players build better bases and execute stronger attacks. Whether you're a fresh TH7 learning the basics or a maxed TH16 pushing Legend League, our guides are written to give you actionable, up-to-date strategy.</p>
+
+          <p>We cover every active Town Hall level — from TH7 through TH16 — with dedicated guides for war bases, farming bases, and trophy pushing layouts. Each guide explains the <em>why</em> behind every design decision, not just what to copy.</p>
+
+          <h2>What We Cover</h2>
+          <ul>
+            <li><strong>War Base Design</strong> — Anti-3-star layouts for Clan War and Clan War League, updated for the current meta</li>
+            <li><strong>Farming Bases</strong> — Dark Elixir protection strategies to speed up hero upgrades</li>
+            <li><strong>Trophy Bases</strong> — Layouts optimized for Legend League and trophy pushing at every TH level</li>
+            <li><strong>Attack Strategies</strong> — Army compositions, spell timing, and funnel techniques for every major attack style</li>
+            <li><strong>Meta Analysis</strong> — Breakdowns of dominant attack compositions so you can design defensively against them</li>
+          </ul>
+
+          <h2>Why We Built This</h2>
+          <p>Most COC content online focuses on copy-paste base links without explaining the underlying principles. We believe that understanding <em>why</em> a base works makes you a better player — because the meta changes, but the design principles don't.</p>
+          <p>Our goal is to be the resource we wish existed when we started playing: clear, well-organized, and genuinely useful at every stage of the game.</p>
+
+          <h2>How Often We Update</h2>
+          <p>Clash of Clans receives major balance updates multiple times per year. We review and update our guides after each significant patch to ensure the strategies remain valid against the current meta. Guides are dated so you always know when they were last reviewed.</p>
+
+          <h2>Disclaimer</h2>
+          <p>COC Base Guide is an independent fan site and is not affiliated with, endorsed by, or connected to Supercell in any way. Clash of Clans is a trademark of Supercell Oy.</p>
+          <p>Base layout copy links referenced in our guides are sourced from publicly available community resources. We do not host game assets or claim ownership of any Clash of Clans intellectual property.</p>
+
+          <h2>Contact</h2>
+          <p>Have a suggestion, spotted an outdated guide, or want to contribute? We'd love to hear from you. Reach out through our GitHub repository or leave feedback via the community channels listed in our guides.</p>
+
+          <blockquote>
+            Good base design isn't about copying the best layout — it's about understanding why it works.
+          </blockquote>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© {new Date().getFullYear()} COC Base Guide · <a href="/privacy-policy">Privacy Policy</a> · <a href="/about">About</a> · <a href="/sitemap-index.xml">Sitemap</a></p>
+    </div>
+  </footer>
+</BaseLayout>
