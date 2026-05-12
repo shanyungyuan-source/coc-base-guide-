@@ -2,12 +2,59 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const articles = (await getCollection('articles')).sort(
+const allArticles = (await getCollection('articles')).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
 );
 
 const siteName = 'COC Base Guide';
 const siteDesc = 'Expert Clash of Clans base layouts and attack strategies for every Town Hall level. Trophy bases, war bases, farming bases, and more.';
+
+// Card cover theme + icon based on article tags/title
+function getCardTheme(tags: string[], title: string): { theme: string; icon: string } {
+  const t = [...tags.map(s => s.toLowerCase()), title.toLowerCase()].join(' ');
+  if (/attack|3-star|laloon|hydra|hog rider|electro dragon|super witch|root rider|yeti|queen walk|blimp/.test(t))
+    return { theme: 'theme-attack', icon: '⚔️' };
+  if (/war base|clan castle|defense|base design|anti/.test(t))
+    return { theme: 'theme-defense', icon: '🛡️' };
+  if (/hero|equipment|tier list|barbarian king|archer queen|warden|royal champion|druid/.test(t))
+    return { theme: 'theme-hero', icon: '👑' };
+  if (/clan capital|cwl|clan war league|clan|find/.test(t))
+    return { theme: 'theme-clan', icon: '🏆' };
+  if (/upgrade|magic item|book|potion|wall|builder base|bh|farming|trophy push|beginner|legend league/.test(t))
+    return { theme: 'theme-tips', icon: '📈' };
+  // TH level guides
+  return { theme: 'theme-th', icon: '🏰' };
+}
+
+// Group articles into categories
+function categorize(articles: typeof allArticles) {
+  const thBase = articles.filter(a => /th\d+-base-2026/.test(a.slug));
+  const thAttack = articles.filter(a => /attack/.test(a.slug));
+  const thUpgrade = articles.filter(a => /upgrade-priority/.test(a.slug));
+  const heroEquip = articles.filter(a => /hero|equipment/.test(a.slug) && !a.slug.includes('attack'));
+  const strategies = articles.filter(a =>
+    /super-troop|siege|hog-rider|electro-dragon|beginner-attack|best-coc-attack|how-to-3-star/.test(a.slug));
+  const progressTips = articles.filter(a =>
+    /magic-item|farming|wall-upgrade|trophy-push|builder-base|legend-league/.test(a.slug));
+  const clanWar = articles.filter(a =>
+    /clan-capital|cwl|war-base-design|clan-castle|how-to-find-best-clan/.test(a.slug));
+  const beginner = articles.filter(a => /beginner-complete/.test(a.slug));
+
+  // Catch-all for uncategorized
+  const categorized = new Set([
+    ...thBase, ...thAttack, ...thUpgrade, ...heroEquip,
+    ...strategies, ...progressTips, ...clanWar, ...beginner
+  ].map(a => a.slug));
+  const other = articles.filter(a => !categorized.has(a.slug));
+
+  return { thBase, thAttack, thUpgrade, heroEquip, strategies, progressTips, clanWar, beginner, other };
+}
+
+const cats = categorize(allArticles);
+
+function formatDate(d: Date) {
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+}
 ---
 
 <BaseLayout title={siteName} description={siteDesc}>
@@ -22,59 +69,329 @@ const siteDesc = 'Expert Clash of Clans base layouts and attack strategies for e
       </a>
       <nav class="site-nav">
         <a href="/" class="active">Home</a>
+        <a href="/about">About</a>
       </nav>
     </div>
   </header>
 
   <main>
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+      <span class="hero-icon">🏰</span>
+      <h1 class="hero-title">COC Base Guide</h1>
+      <p class="hero-subtitle">Expert strategies for every Town Hall level — attack guides, upgrade priorities, war bases, and more.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-num">{allArticles.length}</span>
+          <span class="hero-stat-label">Guides</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">TH7–16</span>
+          <span class="hero-stat-label">All Levels</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">2026</span>
+          <span class="hero-stat-label">Meta</span>
+        </div>
+      </div>
+    </section>
+
     <div class="container">
-      <section class="hero">
-        <h1>⚔️ COC Base Guide</h1>
-        <p>Expert base layouts and attack strategies to dominate every battle</p>
-      </section>
 
-      <section>
-        <p class="section-title">📋 All Guides ({articles.length})</p>
-
-        {articles.length === 0 ? (
-          <div class="empty">
-            <p>No articles yet. Add Markdown files to <code>src/content/articles/</code> to get started.</p>
+      {/* ── Town Hall Base Guides ── */}
+      {cats.thBase.length > 0 && (
+        <section class="category-section">
+          <div class="category-header">
+            <span class="category-icon">🏰</span>
+            <span class="category-title">Town Hall Base Guides</span>
+            <span class="category-count">{cats.thBase.length} guides</span>
           </div>
-        ) : (
           <div class="article-grid">
-            {articles.map(article => {
-              const date = article.data.date.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              });
+            {cats.thBase.map(a => {
+              const { theme, icon } = getCardTheme(a.data.tags ?? [], a.data.title);
               return (
-                <a href={`/articles/${article.slug}`} class="article-card">
-                  <div class="card-title">{article.data.title}</div>
-                  <div class="card-desc">{article.data.description}</div>
-                  <div class="card-meta">
-                    <span class="card-date">📅 {date}</span>
-                    {article.data.tags && article.data.tags.length > 0 && (
+                <a href={`/articles/${a.slug}`} class="article-card">
+                  <div class={`card-cover ${theme}`}>
+                    <span class="card-cover-icon">{icon}</span>
+                  </div>
+                  <div class="card-body">
+                    <div class="card-title">{a.data.title}</div>
+                    <div class="card-desc">{a.data.description}</div>
+                    {a.data.tags && a.data.tags.length > 0 && (
                       <div class="tags">
-                        {article.data.tags.slice(0, 3).map(tag => (
-                          <span class="tag">{tag}</span>
-                        ))}
+                        {a.data.tags.slice(0, 3).map(tag => <span class="tag">{tag}</span>)}
                       </div>
                     )}
+                    <div class="card-footer">
+                      <span class="card-date">📅 {formatDate(a.data.date)}</span>
+                      <span class="card-arrow">Read guide →</span>
+                    </div>
                   </div>
-                  <span class="card-arrow">Read guide →</span>
                 </a>
               );
             })}
           </div>
-        )}
-      </section>
+        </section>
+      )}
+
+      {/* ── Attack Guides ── */}
+      {cats.thAttack.length > 0 && (
+        <section class="category-section">
+          <div class="category-header">
+            <span class="category-icon">⚔️</span>
+            <span class="category-title">Attack Guides</span>
+            <span class="category-count">{cats.thAttack.length} guides</span>
+          </div>
+          <div class="article-grid">
+            {cats.thAttack.map(a => {
+              const { theme, icon } = getCardTheme(a.data.tags ?? [], a.data.title);
+              return (
+                <a href={`/articles/${a.slug}`} class="article-card">
+                  <div class={`card-cover ${theme}`}>
+                    <span class="card-cover-icon">{icon}</span>
+                  </div>
+                  <div class="card-body">
+                    <div class="card-title">{a.data.title}</div>
+                    <div class="card-desc">{a.data.description}</div>
+                    {a.data.tags && a.data.tags.length > 0 && (
+                      <div class="tags">
+                        {a.data.tags.slice(0, 3).map(tag => <span class="tag">{tag}</span>)}
+                      </div>
+                    )}
+                    <div class="card-footer">
+                      <span class="card-date">📅 {formatDate(a.data.date)}</span>
+                      <span class="card-arrow">Read guide →</span>
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {/* ── Upgrade Priority Guides ── */}
+      {cats.thUpgrade.length > 0 && (
+        <section class="category-section">
+          <div class="category-header">
+            <span class="category-icon">📈</span>
+            <span class="category-title">Upgrade Priority Guides</span>
+            <span class="category-count">{cats.thUpgrade.length} guides</span>
+          </div>
+          <div class="article-grid">
+            {cats.thUpgrade.map(a => {
+              const { theme, icon } = getCardTheme(a.data.tags ?? [], a.data.title);
+              return (
+                <a href={`/articles/${a.slug}`} class="article-card">
+                  <div class={`card-cover ${theme}`}>
+                    <span class="card-cover-icon">{icon}</span>
+                  </div>
+                  <div class="card-body">
+                    <div class="card-title">{a.data.title}</div>
+                    <div class="card-desc">{a.data.description}</div>
+                    {a.data.tags && a.data.tags.length > 0 && (
+                      <div class="tags">
+                        {a.data.tags.slice(0, 3).map(tag => <span class="tag">{tag}</span>)}
+                      </div>
+                    )}
+                    <div class="card-footer">
+                      <span class="card-date">📅 {formatDate(a.data.date)}</span>
+                      <span class="card-arrow">Read guide →</span>
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {/* ── Heroes & Equipment ── */}
+      {cats.heroEquip.length > 0 && (
+        <section class="category-section">
+          <div class="category-header">
+            <span class="category-icon">👑</span>
+            <span class="category-title">Heroes & Equipment</span>
+            <span class="category-count">{cats.heroEquip.length} guides</span>
+          </div>
+          <div class="article-grid">
+            {cats.heroEquip.map(a => {
+              const { theme, icon } = getCardTheme(a.data.tags ?? [], a.data.title);
+              return (
+                <a href={`/articles/${a.slug}`} class="article-card">
+                  <div class={`card-cover ${theme}`}>
+                    <span class="card-cover-icon">{icon}</span>
+                  </div>
+                  <div class="card-body">
+                    <div class="card-title">{a.data.title}</div>
+                    <div class="card-desc">{a.data.description}</div>
+                    {a.data.tags && a.data.tags.length > 0 && (
+                      <div class="tags">
+                        {a.data.tags.slice(0, 3).map(tag => <span class="tag">{tag}</span>)}
+                      </div>
+                    )}
+                    <div class="card-footer">
+                      <span class="card-date">📅 {formatDate(a.data.date)}</span>
+                      <span class="card-arrow">Read guide →</span>
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {/* ── Attack Strategies ── */}
+      {cats.strategies.length > 0 && (
+        <section class="category-section">
+          <div class="category-header">
+            <span class="category-icon">🎯</span>
+            <span class="category-title">Attack Strategies</span>
+            <span class="category-count">{cats.strategies.length} guides</span>
+          </div>
+          <div class="article-grid">
+            {cats.strategies.map(a => {
+              const { theme, icon } = getCardTheme(a.data.tags ?? [], a.data.title);
+              return (
+                <a href={`/articles/${a.slug}`} class="article-card">
+                  <div class={`card-cover ${theme}`}>
+                    <span class="card-cover-icon">{icon}</span>
+                  </div>
+                  <div class="card-body">
+                    <div class="card-title">{a.data.title}</div>
+                    <div class="card-desc">{a.data.description}</div>
+                    {a.data.tags && a.data.tags.length > 0 && (
+                      <div class="tags">
+                        {a.data.tags.slice(0, 3).map(tag => <span class="tag">{tag}</span>)}
+                      </div>
+                    )}
+                    <div class="card-footer">
+                      <span class="card-date">📅 {formatDate(a.data.date)}</span>
+                      <span class="card-arrow">Read guide →</span>
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {/* ── Clan & War ── */}
+      {cats.clanWar.length > 0 && (
+        <section class="category-section">
+          <div class="category-header">
+            <span class="category-icon">🏆</span>
+            <span class="category-title">Clan & War</span>
+            <span class="category-count">{cats.clanWar.length} guides</span>
+          </div>
+          <div class="article-grid">
+            {cats.clanWar.map(a => {
+              const { theme, icon } = getCardTheme(a.data.tags ?? [], a.data.title);
+              return (
+                <a href={`/articles/${a.slug}`} class="article-card">
+                  <div class={`card-cover ${theme}`}>
+                    <span class="card-cover-icon">{icon}</span>
+                  </div>
+                  <div class="card-body">
+                    <div class="card-title">{a.data.title}</div>
+                    <div class="card-desc">{a.data.description}</div>
+                    {a.data.tags && a.data.tags.length > 0 && (
+                      <div class="tags">
+                        {a.data.tags.slice(0, 3).map(tag => <span class="tag">{tag}</span>)}
+                      </div>
+                    )}
+                    <div class="card-footer">
+                      <span class="card-date">📅 {formatDate(a.data.date)}</span>
+                      <span class="card-arrow">Read guide →</span>
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {/* ── Progress & Tips ── */}
+      {[...cats.progressTips, ...cats.beginner].length > 0 && (
+        <section class="category-section">
+          <div class="category-header">
+            <span class="category-icon">💡</span>
+            <span class="category-title">Progress Tips & Farming</span>
+            <span class="category-count">{cats.progressTips.length + cats.beginner.length} guides</span>
+          </div>
+          <div class="article-grid">
+            {[...cats.beginner, ...cats.progressTips].map(a => {
+              const { theme, icon } = getCardTheme(a.data.tags ?? [], a.data.title);
+              return (
+                <a href={`/articles/${a.slug}`} class="article-card">
+                  <div class={`card-cover ${theme}`}>
+                    <span class="card-cover-icon">{icon}</span>
+                  </div>
+                  <div class="card-body">
+                    <div class="card-title">{a.data.title}</div>
+                    <div class="card-desc">{a.data.description}</div>
+                    {a.data.tags && a.data.tags.length > 0 && (
+                      <div class="tags">
+                        {a.data.tags.slice(0, 3).map(tag => <span class="tag">{tag}</span>)}
+                      </div>
+                    )}
+                    <div class="card-footer">
+                      <span class="card-date">📅 {formatDate(a.data.date)}</span>
+                      <span class="card-arrow">Read guide →</span>
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {/* ── Other / uncategorized ── */}
+      {cats.other.length > 0 && (
+        <section class="category-section">
+          <div class="category-header">
+            <span class="category-icon">📋</span>
+            <span class="category-title">More Guides</span>
+            <span class="category-count">{cats.other.length} guides</span>
+          </div>
+          <div class="article-grid">
+            {cats.other.map(a => {
+              const { theme, icon } = getCardTheme(a.data.tags ?? [], a.data.title);
+              return (
+                <a href={`/articles/${a.slug}`} class="article-card">
+                  <div class={`card-cover ${theme}`}>
+                    <span class="card-cover-icon">{icon}</span>
+                  </div>
+                  <div class="card-body">
+                    <div class="card-title">{a.data.title}</div>
+                    <div class="card-desc">{a.data.description}</div>
+                    {a.data.tags && a.data.tags.length > 0 && (
+                      <div class="tags">
+                        {a.data.tags.slice(0, 3).map(tag => <span class="tag">{tag}</span>)}
+                      </div>
+                    )}
+                    <div class="card-footer">
+                      <span class="card-date">📅 {formatDate(a.data.date)}</span>
+                      <span class="card-arrow">Read guide →</span>
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>© {new Date().getFullYear()} COC Base Guide · <a href="/privacy-policy">Privacy Policy</a> · <a href="/about">About</a> · <a href="/sitemap-index.xml">Sitemap</a></p>
+      <p>© {new Date().getFullYear()} COC Base Guide &nbsp;·&nbsp; <a href="/privacy-policy">Privacy Policy</a> &nbsp;·&nbsp; <a href="/about">About</a> &nbsp;·&nbsp; <a href="/sitemap-index.xml">Sitemap</a></p>
     </div>
   </footer>
 </BaseLayout>

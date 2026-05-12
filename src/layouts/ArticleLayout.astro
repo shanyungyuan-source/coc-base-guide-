@@ -19,6 +19,24 @@ const formattedDate = date.toLocaleDateString('en-US', {
   month: 'long',
   day: 'numeric',
 });
+
+// Determine banner gradient and icon from tags/title
+function getBannerTheme(tags: string[], title: string): { gradient: string; icon: string } {
+  const t = [...tags.map(s => s.toLowerCase()), title.toLowerCase()].join(' ');
+  if (/attack|3-star|laloon|hydra|hog rider|electro dragon|super witch|root rider|yeti|queen walk|blimp/.test(t))
+    return { gradient: 'linear-gradient(135deg, #4a0f0f 0%, #6e2020 60%, #3a0808 100%)', icon: '⚔️' };
+  if (/war base|clan castle|defense|base design|anti/.test(t))
+    return { gradient: 'linear-gradient(135deg, #180f3d 0%, #2a1a5e 60%, #110a2d 100%)', icon: '🛡️' };
+  if (/hero|equipment|tier list|barbarian king|archer queen|warden|royal champion|druid/.test(t))
+    return { gradient: 'linear-gradient(135deg, #0f3d25 0%, #1a5e3a 60%, #092b1a 100%)', icon: '👑' };
+  if (/clan capital|cwl|clan war league|clan|find/.test(t))
+    return { gradient: 'linear-gradient(135deg, #2d0f3d 0%, #4a1a5e 60%, #200a2d 100%)', icon: '🏆' };
+  if (/upgrade|magic item|book|potion|wall|builder base|bh|farming|trophy|beginner|legend/.test(t))
+    return { gradient: 'linear-gradient(135deg, #3d2e0f 0%, #5e4a1a 60%, #2d2009 100%)', icon: '📈' };
+  return { gradient: 'linear-gradient(135deg, #0f2850 0%, #1a3a6e 60%, #091c3d 100%)', icon: '🏰' };
+}
+
+const { gradient, icon } = getBannerTheme(tags, title);
 ---
 
 <BaseLayout
@@ -39,16 +57,33 @@ const formattedDate = date.toLocaleDateString('en-US', {
       </a>
       <nav class="site-nav">
         <a href="/">Home</a>
+        <a href="/about">About</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <div class="container">
-      <article class="article-page">
-        <a href="/" class="back-btn">← Back to all guides</a>
+    <article class="article-page">
+
+      <!-- Hero Banner -->
+      <div class="article-hero">
+        <div class="article-hero-bg" style={`background: ${gradient};`}></div>
+        <span class="article-hero-icon">{icon}</span>
+        <div class="article-hero-content">
+          <div class="breadcrumb">
+            <a href="/">Home</a>
+            <span>›</span>
+            <span>{tags[0] ?? 'Guide'}</span>
+          </div>
+          <h1 class="article-title">{title}</h1>
+        </div>
+      </div>
+
+      <div class="container">
+        <a href="/" class="back-btn">← All Guides</a>
 
         <header class="article-header">
+          <p class="article-desc">{description}</p>
           <div class="article-meta">
             <span class="card-date">📅 {formattedDate}</span>
             {tags.length > 0 && (
@@ -57,20 +92,18 @@ const formattedDate = date.toLocaleDateString('en-US', {
               </div>
             )}
           </div>
-          <h1 class="article-title">{title}</h1>
-          <p class="article-desc">{description}</p>
         </header>
 
         <div class="prose">
           <slot />
         </div>
-      </article>
-    </div>
+      </div>
+    </article>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>© {new Date().getFullYear()} COC Base Guide · <a href="/privacy-policy">Privacy Policy</a> · <a href="/about">About</a> · <a href="/sitemap-index.xml">Sitemap</a></p>
+      <p>© {new Date().getFullYear()} COC Base Guide &nbsp;·&nbsp; <a href="/privacy-policy">Privacy Policy</a> &nbsp;·&nbsp; <a href="/about">About</a> &nbsp;·&nbsp; <a href="/sitemap-index.xml">Sitemap</a></p>
     </div>
   </footer>
 </BaseLayout>
