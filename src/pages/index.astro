@@ -67,10 +67,11 @@ function formatDate(d: Date) {
           <span class="logo-sub">Clash of Clans Strategy</span>
         </span>
       </a>
-      <nav class="site-nav">
+      <nav class="site-nav" id="site-nav">
         <a href="/" class="active">Home</a>
         <a href="/about">About</a>
       </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
     </div>
   </header>
 
@@ -97,6 +98,23 @@ function formatDate(d: Date) {
     </section>
 
     <div class="container">
+
+      {/* ── Start Here Strip ── */}
+      <div class="featured-strip">
+        <div class="featured-icon">🚀</div>
+        <div class="featured-text">
+          <div class="featured-label">New to the site?</div>
+          <h2>Start Here</h2>
+          <p>Jump straight to the guides that matter most for your Town Hall level.</p>
+          <div class="featured-links">
+            <a href="/articles/coc-beginner-complete-guide-2026" class="featured-link">🌱 Beginner Guide</a>
+            <a href="/articles/coc-hero-upgrade-order-guide" class="featured-link">👑 Hero Upgrade Order</a>
+            <a href="/articles/best-coc-attack-strategies-2026" class="featured-link">⚔️ Best Attacks 2026</a>
+            <a href="/articles/hero-equipment-tier-list-2026" class="featured-link">🔱 Equipment Tier List</a>
+            <a href="/articles/cwl-guide-tips-2026" class="featured-link">🏆 CWL Guide</a>
+          </div>
+        </div>
+      </div>
 
       {/* ── Town Hall Base Guides ── */}
       {cats.thBase.length > 0 && (
@@ -394,4 +412,10 @@ function formatDate(d: Date) {
       <p>© {new Date().getFullYear()} COC Base Guide &nbsp;·&nbsp; <a href="/privacy-policy">Privacy Policy</a> &nbsp;·&nbsp; <a href="/about">About</a> &nbsp;·&nbsp; <a href="/sitemap-index.xml">Sitemap</a></p>
     </div>
   </footer>
+
+  <script>
+    const toggle = document.getElementById('nav-toggle');
+    const nav = document.getElementById('site-nav');
+    toggle?.addEventListener('click', () => nav?.classList.toggle('open'));
+  </script>
 </BaseLayout>

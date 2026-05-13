@@ -1,5 +1,8 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface TocHeading { depth: number; slug: string; text: string; }
 
 interface Props {
   title: string;
@@ -8,35 +11,72 @@ interface Props {
   tags?: string[];
   image?: string;
   slug: string;
+  readingTime?: number;
+  tocHeadings?: TocHeading[];
+  related?: CollectionEntry<'articles'>[];
 }
 
-const { title, description, date, tags = [], image, slug } = Astro.props;
+const { title, description, date, tags = [], image, slug,
+        readingTime = 5, tocHeadings = [], related = [] } = Astro.props;
+
 const siteName = 'COC Base Guide';
 const fullTitle = `${title} | ${siteName}`;
+const siteUrl = 'https://coc-base-guide.vercel.app';
 const publishDate = date.toISOString();
 const formattedDate = date.toLocaleDateString('en-US', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
+  year: 'numeric', month: 'long', day: 'numeric',
 });
 
-// Determine banner gradient and icon from tags/title
-function getBannerTheme(tags: string[], title: string): { gradient: string; icon: string } {
+// JSON-LD structured data
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: publishDate,
+  author: { '@type': 'Organization', name: siteName, url: siteUrl },
+  publisher: {
+    '@type': 'Organization',
+    name: siteName,
+    url: siteUrl,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/favicon.svg` },
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/articles/${slug}` },
+  keywords: tags.join(', '),
+});
+
+// Banner theme
+function getBannerTheme(tags: string[], title: string) {
   const t = [...tags.map(s => s.toLowerCase()), title.toLowerCase()].join(' ');
   if (/attack|3-star|laloon|hydra|hog rider|electro dragon|super witch|root rider|yeti|queen walk|blimp/.test(t))
-    return { gradient: 'linear-gradient(135deg, #4a0f0f 0%, #6e2020 60%, #3a0808 100%)', icon: '⚔️' };
+    return { gradient: 'linear-gradient(135deg, #4a0f0f 0%, #6e2020 60%, #3a0808 100%)', icon: '⚔️', accent: '#e05555' };
   if (/war base|clan castle|defense|base design|anti/.test(t))
-    return { gradient: 'linear-gradient(135deg, #180f3d 0%, #2a1a5e 60%, #110a2d 100%)', icon: '🛡️' };
+    return { gradient: 'linear-gradient(135deg, #180f3d 0%, #2a1a5e 60%, #110a2d 100%)', icon: '🛡️', accent: '#8855e0' };
   if (/hero|equipment|tier list|barbarian king|archer queen|warden|royal champion|druid/.test(t))
-    return { gradient: 'linear-gradient(135deg, #0f3d25 0%, #1a5e3a 60%, #092b1a 100%)', icon: '👑' };
+    return { gradient: 'linear-gradient(135deg, #0f3d25 0%, #1a5e3a 60%, #092b1a 100%)', icon: '👑', accent: '#44cc77' };
   if (/clan capital|cwl|clan war league|clan|find/.test(t))
-    return { gradient: 'linear-gradient(135deg, #2d0f3d 0%, #4a1a5e 60%, #200a2d 100%)', icon: '🏆' };
+    return { gradient: 'linear-gradient(135deg, #2d0f3d 0%, #4a1a5e 60%, #200a2d 100%)', icon: '🏆', accent: '#cc55aa' };
   if (/upgrade|magic item|book|potion|wall|builder base|bh|farming|trophy|beginner|legend/.test(t))
-    return { gradient: 'linear-gradient(135deg, #3d2e0f 0%, #5e4a1a 60%, #2d2009 100%)', icon: '📈' };
-  return { gradient: 'linear-gradient(135deg, #0f2850 0%, #1a3a6e 60%, #091c3d 100%)', icon: '🏰' };
+    return { gradient: 'linear-gradient(135deg, #3d2e0f 0%, #5e4a1a 60%, #2d2009 100%)', icon: '📈', accent: '#ddaa33' };
+  return { gradient: 'linear-gradient(135deg, #0f2850 0%, #1a3a6e 60%, #091c3d 100%)', icon: '🏰', accent: '#4a9eff' };
 }
 
-const { gradient, icon } = getBannerTheme(tags, title);
+const { gradient, icon, accent } = getBannerTheme(tags, title);
+
+function getCardTheme(tags: string[], title: string) {
+  const t = [...tags.map(s => s.toLowerCase()), title.toLowerCase()].join(' ');
+  if (/attack|3-star|laloon|hydra|hog|electro|super witch|root rider|yeti|queen walk|blimp/.test(t))
+    return { theme: 'theme-attack', icon: '⚔️' };
+  if (/war base|clan castle|defense|base design|anti/.test(t))
+    return { theme: 'theme-defense', icon: '🛡️' };
+  if (/hero|equipment|tier list|barbarian king|archer queen|warden|royal champion|druid/.test(t))
+    return { theme: 'theme-hero', icon: '👑' };
+  if (/clan capital|cwl|clan war league|clan|find/.test(t))
+    return { theme: 'theme-clan', icon: '🏆' };
+  if (/upgrade|magic item|book|potion|wall|builder base|bh|farming|trophy|beginner|legend/.test(t))
+    return { theme: 'theme-tips', icon: '📈' };
+  return { theme: 'theme-th', icon: '🏰' };
+}
 ---
 
 <BaseLayout
@@ -45,7 +85,11 @@ const { gradient, icon } = getBannerTheme(tags, title);
   ogImage={image}
   type="article"
   publishDate={publishDate}
+  jsonLd={jsonLd}
 >
+  <!-- Reading progress bar -->
+  <div id="progress-bar" style={`--accent: ${accent};`}></div>
+
   <header class="site-header">
     <div class="container">
       <a href="/" class="site-logo">
@@ -55,10 +99,11 @@ const { gradient, icon } = getBannerTheme(tags, title);
           <span class="logo-sub">Clash of Clans Strategy</span>
         </span>
       </a>
-      <nav class="site-nav">
+      <nav class="site-nav" id="site-nav">
         <a href="/">Home</a>
         <a href="/about">About</a>
       </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
     </div>
   </header>
 
@@ -80,30 +125,127 @@ const { gradient, icon } = getBannerTheme(tags, title);
       </div>
 
       <div class="container">
-        <a href="/" class="back-btn">← All Guides</a>
+        <div class="article-layout">
 
-        <header class="article-header">
-          <p class="article-desc">{description}</p>
-          <div class="article-meta">
-            <span class="card-date">📅 {formattedDate}</span>
-            {tags.length > 0 && (
-              <div class="tags">
-                {tags.map(tag => <span class="tag">{tag}</span>)}
+          <!-- Main content column -->
+          <div class="article-main">
+            <a href="/" class="back-btn">← All Guides</a>
+
+            <header class="article-header">
+              <p class="article-desc">{description}</p>
+              <div class="article-meta">
+                <span class="meta-item">📅 {formattedDate}</span>
+                <span class="meta-item">⏱️ {readingTime} min read</span>
+                {tags.length > 0 && (
+                  <div class="tags">
+                    {tags.map(tag => <span class="tag">{tag}</span>)}
+                  </div>
+                )}
               </div>
+            </header>
+
+            <div class="prose" id="article-content">
+              <slot />
+            </div>
+
+            <!-- Related Articles -->
+            {related.length > 0 && (
+              <section class="related-section">
+                <h2 class="related-title">Related Guides</h2>
+                <div class="related-grid">
+                  {related.map(a => {
+                    const { theme, icon: ci } = getCardTheme(a.data.tags ?? [], a.data.title);
+                    return (
+                      <a href={`/articles/${a.slug}`} class="related-card">
+                        <div class={`related-cover ${theme}`}>
+                          <span>{ci}</span>
+                        </div>
+                        <div class="related-body">
+                          <div class="related-card-title">{a.data.title}</div>
+                          <span class="card-arrow">Read →</span>
+                        </div>
+                      </a>
+                    );
+                  })}
+                </div>
+              </section>
             )}
           </div>
-        </header>
 
-        <div class="prose">
-          <slot />
+          <!-- TOC Sidebar -->
+          {tocHeadings.length >= 3 && (
+            <aside class="toc-sidebar">
+              <div class="toc-box">
+                <div class="toc-header">📋 Contents</div>
+                <nav>
+                  <ol class="toc-list">
+                    {tocHeadings.map(h => (
+                      <li><a href={`#${h.slug}`} class="toc-link">{h.text}</a></li>
+                    ))}
+                  </ol>
+                </nav>
+              </div>
+            </aside>
+          )}
+
         </div>
       </div>
     </article>
   </main>
+
+  <!-- Back to top -->
+  <button id="back-to-top" aria-label="Back to top">↑</button>
 
   <footer class="site-footer">
     <div class="container">
       <p>© {new Date().getFullYear()} COC Base Guide &nbsp;·&nbsp; <a href="/privacy-policy">Privacy Policy</a> &nbsp;·&nbsp; <a href="/about">About</a> &nbsp;·&nbsp; <a href="/sitemap-index.xml">Sitemap</a></p>
     </div>
   </footer>
+
+  <script>
+    // Reading progress bar
+    const bar = document.getElementById('progress-bar');
+    if (bar) {
+      window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        const total = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.setProperty('--pct', `${total > 0 ? (scrolled / total) * 100 : 0}%`);
+      }, { passive: true });
+    }
+
+    // Back to top button
+    const btn = document.getElementById('back-to-top');
+    if (btn) {
+      window.addEventListener('scroll', () => {
+        btn.classList.toggle('visible', window.scrollY > 500);
+      }, { passive: true });
+      btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    }
+
+    // Mobile nav toggle
+    const toggle = document.getElementById('nav-toggle');
+    const nav = document.getElementById('site-nav');
+    toggle?.addEventListener('click', () => nav?.classList.toggle('open'));
+
+    // Active TOC link highlight
+    const tocLinks = document.querySelectorAll<HTMLAnchorElement>('.toc-link');
+    if (tocLinks.length > 0) {
+      const headingEls = Array.from(tocLinks).map(l => {
+        const id = l.getAttribute('href')?.slice(1);
+        return id ? document.getElementById(id) : null;
+      }).filter(Boolean) as HTMLElement[];
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            tocLinks.forEach(l => l.classList.remove('active'));
+            const active = document.querySelector(`.toc-link[href="#${entry.target.id}"]`);
+            active?.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-20% 0px -70% 0px' });
+
+      headingEls.forEach(el => observer.observe(el));
+    }
+  </script>
 </BaseLayout>
