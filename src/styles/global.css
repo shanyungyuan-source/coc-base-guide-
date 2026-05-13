@@ -901,3 +901,6 @@ main { flex: 1; }
   .hero-stats { gap: 1.5rem; }
   .site-header { position: relative; }
 }
+
+/* AdSense ad units */
+.ad-unit { margin: 1.75rem 0; min-height: 90px; }

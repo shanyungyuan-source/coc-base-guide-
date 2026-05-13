@@ -145,9 +145,27 @@ function getCardTheme(tags: string[], title: string) {
               </div>
             </header>
 
+            <!-- AdSense in-article unit — replace ca-pub-XXXXXXXXXXXXXXXX and data-ad-slot -->
+            <ins class="adsbygoogle ad-unit"
+              style="display:block"
+              data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+              data-ad-slot="XXXXXXXXXX"
+              data-ad-format="auto"
+              data-full-width-responsive="true"></ins>
+            <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
             <div class="prose" id="article-content" data-pagefind-body>
               <slot />
             </div>
+
+            <!-- AdSense end-of-article unit -->
+            <ins class="adsbygoogle ad-unit"
+              style="display:block"
+              data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+              data-ad-slot="XXXXXXXXXX"
+              data-ad-format="auto"
+              data-full-width-responsive="true"></ins>
+            <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
             <!-- Related Articles -->
             {related.length > 0 && (

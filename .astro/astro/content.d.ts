@@ -162,6 +162,13 @@ declare module 'astro:content' {
   collection: "articles";
   data: InferEntrySchema<"articles">
 } & { render(): Render[".md"] };
+"best-war-troops-2026.md": {
+	id: "best-war-troops-2026.md";
+  slug: "best-war-troops-2026";
+  body: string;
+  collection: "articles";
+  data: InferEntrySchema<"articles">
+} & { render(): Render[".md"] };
 "builder-base-guide-2026.md": {
 	id: "builder-base-guide-2026.md";
   slug: "builder-base-guide-2026";
@@ -193,6 +200,13 @@ declare module 'astro:content' {
 "coc-beginner-complete-guide-2026.md": {
 	id: "coc-beginner-complete-guide-2026.md";
   slug: "coc-beginner-complete-guide-2026";
+  body: string;
+  collection: "articles";
+  data: InferEntrySchema<"articles">
+} & { render(): Render[".md"] };
+"coc-equipment-upgrade-priority-2026.md": {
+	id: "coc-equipment-upgrade-priority-2026.md";
+  slug: "coc-equipment-upgrade-priority-2026";
   body: string;
   collection: "articles";
   data: InferEntrySchema<"articles">
@@ -288,6 +302,13 @@ declare module 'astro:content' {
   collection: "articles";
   data: InferEntrySchema<"articles">
 } & { render(): Render[".md"] };
+"hydra-attack-guide-2026.md": {
+	id: "hydra-attack-guide-2026.md";
+  slug: "hydra-attack-guide-2026";
+  body: string;
+  collection: "articles";
+  data: InferEntrySchema<"articles">
+} & { render(): Render[".md"] };
 "legend-league-guide-beginners.md": {
 	id: "legend-league-guide-beginners.md";
   slug: "legend-league-guide-beginners";
@@ -298,6 +319,13 @@ declare module 'astro:content' {
 "queen-walk-guide-2026.md": {
 	id: "queen-walk-guide-2026.md";
   slug: "queen-walk-guide-2026";
+  body: string;
+  collection: "articles";
+  data: InferEntrySchema<"articles">
+} & { render(): Render[".md"] };
+"root-rider-guide-2026.md": {
+	id: "root-rider-guide-2026.md";
+  slug: "root-rider-guide-2026";
   body: string;
   collection: "articles";
   data: InferEntrySchema<"articles">
@@ -484,9 +512,23 @@ declare module 'astro:content' {
   collection: "articles";
   data: InferEntrySchema<"articles">
 } & { render(): Render[".md"] };
+"th7-attack-guide-2026.md": {
+	id: "th7-attack-guide-2026.md";
+  slug: "th7-attack-guide-2026";
+  body: string;
+  collection: "articles";
+  data: InferEntrySchema<"articles">
+} & { render(): Render[".md"] };
 "th7-base-2026.md": {
 	id: "th7-base-2026.md";
   slug: "th7-base-2026";
+  body: string;
+  collection: "articles";
+  data: InferEntrySchema<"articles">
+} & { render(): Render[".md"] };
+"th8-attack-guide-2026.md": {
+	id: "th8-attack-guide-2026.md";
+  slug: "th8-attack-guide-2026";
   body: string;
   collection: "articles";
   data: InferEntrySchema<"articles">
@@ -508,6 +550,13 @@ declare module 'astro:content' {
 "th9-base-2026.md": {
 	id: "th9-base-2026.md";
   slug: "th9-base-2026";
+  body: string;
+  collection: "articles";
+  data: InferEntrySchema<"articles">
+} & { render(): Render[".md"] };
+"th9-upgrade-priority-2026.md": {
+	id: "th9-upgrade-priority-2026.md";
+  slug: "th9-upgrade-priority-2026";
   body: string;
   collection: "articles";
   data: InferEntrySchema<"articles">

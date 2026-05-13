@@ -55,9 +55,32 @@ const cats = categorize(allArticles);
 function formatDate(d: Date) {
   return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 }
+
+const siteUrl = 'https://coc-base-guide.vercel.app';
+const homepageJsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: siteName,
+    url: siteUrl,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: { '@type': 'EntryPoint', urlTemplate: `${siteUrl}/search?q={search_term_string}` },
+      'query-input': 'required name=search_term_string',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: siteName,
+    url: siteUrl,
+    logo: `${siteUrl}/favicon.svg`,
+    description: siteDesc,
+  },
+]);
 ---
 
-<BaseLayout title={siteName} description={siteDesc}>
+<BaseLayout title={siteName} description={siteDesc} jsonLd={homepageJsonLd}>
   <header class="site-header">
     <div class="container">
       <a href="/" class="site-logo">
