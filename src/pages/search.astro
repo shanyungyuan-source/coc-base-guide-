@@ -40,24 +40,36 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </footer>
 
-  <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
-  <script src="/pagefind/pagefind-ui.js" is:inline>
-  <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      // @ts-ignore
-      new PagefindUI({
-        element: '#search',
-        showImages: false,
-        showSubResults: true,
-        excerptLength: 40,
-        resetStyles: false,
-      });
-    });
+  <!-- Dynamically load pagefind assets to guarantee correct load order -->
+  <script is:inline>
+    (function() {
+      // Inject CSS
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = '/pagefind/pagefind-ui.css';
+      document.head.appendChild(link);
 
-    // Mobile nav
-    const toggle = document.getElementById('nav-toggle');
-    const nav = document.getElementById('site-nav');
-    toggle?.addEventListener('click', () => nav?.classList.toggle('open'));
+      // Inject JS, then init UI after it loads
+      var script = document.createElement('script');
+      script.src = '/pagefind/pagefind-ui.js';
+      script.onload = function() {
+        new PagefindUI({
+          element: '#search',
+          showImages: false,
+          showSubResults: true,
+          excerptLength: 40,
+          resetStyles: false,
+        });
+      };
+      document.head.appendChild(script);
+
+      // Mobile nav
+      document.addEventListener('DOMContentLoaded', function() {
+        var toggle = document.getElementById('nav-toggle');
+        var nav = document.getElementById('site-nav');
+        if (toggle && nav) toggle.addEventListener('click', function() { nav.classList.toggle('open'); });
+      });
+    })();
   </script>
 
   <style>
@@ -76,7 +88,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       color: var(--color-muted);
       margin-bottom: 2rem;
     }
-    /* Pagefind UI overrides to match site theme */
     #search {
       --pagefind-ui-scale: 1;
       --pagefind-ui-primary: #4a9eff;
