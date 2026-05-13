@@ -28,8 +28,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="container">
       <div class="search-page">
         <h1 class="search-title">🔍 Search Guides</h1>
-        <p class="search-subtitle">Search across all COC Base Guide articles</p>
-        <div id="search"></div>
+
+        <div class="search-box-wrap">
+          <input
+            id="search-input"
+            type="search"
+            placeholder="e.g. TH12 upgrade, Queen Walk, Dark Elixir…"
+            autocomplete="off"
+            autofocus
+          />
+        </div>
+
+        <div id="search-results" class="search-results"></div>
       </div>
     </div>
   </main>
@@ -40,62 +50,156 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </footer>
 
-  <!-- Dynamically load pagefind assets to guarantee correct load order -->
   <script is:inline>
-    (function() {
-      // Inject CSS
-      var link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = '/pagefind/pagefind-ui.css';
-      document.head.appendChild(link);
+    var articles = null;
 
-      // Inject JS, then init UI after it loads
-      var script = document.createElement('script');
-      script.src = '/pagefind/pagefind-ui.js';
-      script.onload = function() {
-        new PagefindUI({
-          element: '#search',
-          showImages: false,
-          showSubResults: true,
-          excerptLength: 40,
-          resetStyles: false,
-        });
-      };
-      document.head.appendChild(script);
+    function score(article, q) {
+      var words = q.toLowerCase().split(/\s+/).filter(Boolean);
+      if (!words.length) return 0;
+      var text = (article.title + ' ' + article.description + ' ' + article.tags.join(' ') + ' ' + article.body).toLowerCase();
+      var s = 0;
+      words.forEach(function(w) {
+        if (article.title.toLowerCase().includes(w)) s += 10;
+        if (article.description.toLowerCase().includes(w)) s += 5;
+        article.tags.forEach(function(t) { if (t.toLowerCase().includes(w)) s += 4; });
+        if (article.body.toLowerCase().includes(w)) s += 1;
+      });
+      return s;
+    }
+
+    function excerpt(text, q) {
+      var words = q.toLowerCase().split(/\s+/).filter(Boolean);
+      var lower = text.toLowerCase();
+      var best = -1;
+      words.forEach(function(w) {
+        var i = lower.indexOf(w);
+        if (i !== -1 && (best === -1 || i < best)) best = i;
+      });
+      if (best === -1) return text.slice(0, 120) + '…';
+      var start = Math.max(0, best - 40);
+      var end = Math.min(text.length, best + 120);
+      return (start > 0 ? '…' : '') + text.slice(start, end) + (end < text.length ? '…' : '');
+    }
+
+    function tagIcon(tags) {
+      var t = tags.join(' ').toLowerCase();
+      if (/attack|laloon|yeti|witch|queen walk/.test(t)) return '⚔️';
+      if (/war base|defense|base design/.test(t)) return '🛡️';
+      if (/hero|equipment|tier list/.test(t)) return '👑';
+      if (/clan|cwl/.test(t)) return '🏆';
+      return '📈';
+    }
+
+    function render(query) {
+      var container = document.getElementById('search-results');
+      if (!articles || !query.trim()) {
+        container.innerHTML = '';
+        return;
+      }
+      var results = articles
+        .map(function(a) { return { a: a, s: score(a, query) }; })
+        .filter(function(x) { return x.s > 0; })
+        .sort(function(a, b) { return b.s - a.s; })
+        .slice(0, 12);
+
+      if (!results.length) {
+        container.innerHTML = '<p class="no-results">No results found for "<strong>' + query + '</strong>"</p>';
+        return;
+      }
+
+      container.innerHTML = results.map(function(x) {
+        var a = x.a;
+        var snip = excerpt(a.description + ' ' + a.body, query);
+        var icon = tagIcon(a.tags);
+        return '<a href="/articles/' + a.slug + '" class="sr-card">' +
+          '<div class="sr-icon">' + icon + '</div>' +
+          '<div class="sr-body">' +
+            '<div class="sr-title">' + a.title + '</div>' +
+            '<div class="sr-snip">' + snip + '</div>' +
+            '<div class="sr-tags">' + a.tags.slice(0, 3).map(function(t) { return '<span class="tag">' + t + '</span>'; }).join('') + '</div>' +
+          '</div>' +
+        '</a>';
+      }).join('');
+    }
+
+    // Load index once
+    fetch('/search-index.json')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        articles = data;
+        // If there's already a query (e.g. from URL param), run it
+        var q = new URLSearchParams(window.location.search).get('q') || '';
+        var input = document.getElementById('search-input');
+        if (q) { input.value = q; render(q); }
+      })
+      .catch(function(e) {
+        document.getElementById('search-results').innerHTML = '<p class="no-results">Failed to load search index.</p>';
+      });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var input = document.getElementById('search-input');
+      var timer;
+      input.addEventListener('input', function() {
+        clearTimeout(timer);
+        var q = input.value;
+        timer = setTimeout(function() { render(q); }, 150);
+      });
 
       // Mobile nav
-      document.addEventListener('DOMContentLoaded', function() {
-        var toggle = document.getElementById('nav-toggle');
-        var nav = document.getElementById('site-nav');
-        if (toggle && nav) toggle.addEventListener('click', function() { nav.classList.toggle('open'); });
-      });
-    })();
+      var toggle = document.getElementById('nav-toggle');
+      var nav = document.getElementById('site-nav');
+      if (toggle && nav) toggle.addEventListener('click', function() { nav.classList.toggle('open'); });
+    });
   </script>
 
   <style>
     .search-page {
-      max-width: 780px;
+      max-width: 800px;
       margin: 3rem auto;
-      padding: 0 1rem;
+      padding: 0 1rem 4rem;
     }
     .search-title {
       font-size: 2rem;
       font-weight: 700;
       color: var(--color-text);
-      margin-bottom: 0.4rem;
+      margin-bottom: 1.5rem;
     }
-    .search-subtitle {
-      color: var(--color-muted);
+    .search-box-wrap {
+      position: relative;
       margin-bottom: 2rem;
     }
-    #search {
-      --pagefind-ui-scale: 1;
-      --pagefind-ui-primary: #4a9eff;
-      --pagefind-ui-text: var(--color-text);
-      --pagefind-ui-background: var(--color-surface);
-      --pagefind-ui-border: var(--color-border);
-      --pagefind-ui-tag: var(--color-surface-2);
-      --pagefind-ui-font: 'Inter', sans-serif;
+    #search-input {
+      width: 100%;
+      padding: 0.85rem 1.2rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 2px solid var(--color-border);
+      background: var(--color-surface);
+      color: var(--color-text);
+      outline: none;
+      font-family: inherit;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
     }
+    #search-input:focus { border-color: #4a9eff; }
+    .search-results { display: flex; flex-direction: column; gap: 0.75rem; }
+    .sr-card {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 1.2rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .sr-card:hover { border-color: #4a9eff; transform: translateY(-1px); }
+    .sr-icon { font-size: 1.6rem; flex-shrink: 0; line-height: 1.4; }
+    .sr-body { flex: 1; min-width: 0; }
+    .sr-title { font-weight: 700; font-size: 1rem; color: var(--color-text); margin-bottom: 0.3rem; }
+    .sr-snip { font-size: 0.875rem; color: var(--color-muted); line-height: 1.5; margin-bottom: 0.4rem; }
+    .sr-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+    .no-results { color: var(--color-muted); padding: 1rem 0; }
   </style>
 </BaseLayout>
