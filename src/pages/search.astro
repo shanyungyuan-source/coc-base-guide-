@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Search Guides | COC Base Guide"
+  description="Search all Clash of Clans guides, base layouts, attack strategies, and upgrade tips."
+>
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="site-logo">
+        <span class="logo-icon">⚔️</span>
+        <span class="logo-text">
+          COC Base Guide
+          <span class="logo-sub">Clash of Clans Strategy</span>
+        </span>
+      </a>
+      <nav class="site-nav" id="site-nav">
+        <a href="/">Home</a>
+        <a href="/search" class="active">Search</a>
+        <a href="/about">About</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="search-page">
+        <h1 class="search-title">🔍 Search Guides</h1>
+        <p class="search-subtitle">Search across all COC Base Guide articles</p>
+        <div id="search"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© {new Date().getFullYear()} COC Base Guide &nbsp;·&nbsp; <a href="/privacy-policy">Privacy Policy</a> &nbsp;·&nbsp; <a href="/about">About</a> &nbsp;·&nbsp; <a href="/sitemap-index.xml">Sitemap</a></p>
+    </div>
+  </footer>
+
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+  <script src="/pagefind/pagefind-ui.js" is:inline>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      // @ts-ignore
+      new PagefindUI({
+        element: '#search',
+        showImages: false,
+        showSubResults: true,
+        excerptLength: 40,
+        resetStyles: false,
+      });
+    });
+
+    // Mobile nav
+    const toggle = document.getElementById('nav-toggle');
+    const nav = document.getElementById('site-nav');
+    toggle?.addEventListener('click', () => nav?.classList.toggle('open'));
+  </script>
+
+  <style>
+    .search-page {
+      max-width: 780px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+    .search-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: 0.4rem;
+    }
+    .search-subtitle {
+      color: var(--color-muted);
+      margin-bottom: 2rem;
+    }
+    /* Pagefind UI overrides to match site theme */
+    #search {
+      --pagefind-ui-scale: 1;
+      --pagefind-ui-primary: #4a9eff;
+      --pagefind-ui-text: var(--color-text);
+      --pagefind-ui-background: var(--color-surface);
+      --pagefind-ui-border: var(--color-border);
+      --pagefind-ui-tag: var(--color-surface-2);
+      --pagefind-ui-font: 'Inter', sans-serif;
+    }
+  </style>
+</BaseLayout>
