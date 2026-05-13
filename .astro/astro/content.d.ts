@@ -176,6 +176,13 @@ declare module 'astro:content' {
   collection: "articles";
   data: InferEntrySchema<"articles">
 } & { render(): Render[".md"] };
+"clan-games-guide-2026.md": {
+	id: "clan-games-guide-2026.md";
+  slug: "clan-games-guide-2026";
+  body: string;
+  collection: "articles";
+  data: InferEntrySchema<"articles">
+} & { render(): Render[".md"] };
 "coc-base-copy-guide-2026.md": {
 	id: "coc-base-copy-guide-2026.md";
   slug: "coc-base-copy-guide-2026";
@@ -232,6 +239,13 @@ declare module 'astro:content' {
   collection: "articles";
   data: InferEntrySchema<"articles">
 } & { render(): Render[".md"] };
+"dark-elixir-farming-guide-2026.md": {
+	id: "dark-elixir-farming-guide-2026.md";
+  slug: "dark-elixir-farming-guide-2026";
+  body: string;
+  collection: "articles";
+  data: InferEntrySchema<"articles">
+} & { render(): Render[".md"] };
 "druid-hero-guide-2026.md": {
 	id: "druid-hero-guide-2026.md";
   slug: "druid-hero-guide-2026";
@@ -281,6 +295,13 @@ declare module 'astro:content' {
   collection: "articles";
   data: InferEntrySchema<"articles">
 } & { render(): Render[".md"] };
+"queen-walk-guide-2026.md": {
+	id: "queen-walk-guide-2026.md";
+  slug: "queen-walk-guide-2026";
+  body: string;
+  collection: "articles";
+  data: InferEntrySchema<"articles">
+} & { render(): Render[".md"] };
 "siege-machines-guide-2026.md": {
 	id: "siege-machines-guide-2026.md";
   slug: "siege-machines-guide-2026";
@@ -291,6 +312,13 @@ declare module 'astro:content' {
 "super-troops-guide-2026.md": {
 	id: "super-troops-guide-2026.md";
   slug: "super-troops-guide-2026";
+  body: string;
+  collection: "articles";
+  data: InferEntrySchema<"articles">
+} & { render(): Render[".md"] };
+"th10-attack-guide-2026.md": {
+	id: "th10-attack-guide-2026.md";
+  slug: "th10-attack-guide-2026";
   body: string;
   collection: "articles";
   data: InferEntrySchema<"articles">
@@ -340,6 +368,20 @@ declare module 'astro:content' {
 "th12-base-2026.md": {
 	id: "th12-base-2026.md";
   slug: "th12-base-2026";
+  body: string;
+  collection: "articles";
+  data: InferEntrySchema<"articles">
+} & { render(): Render[".md"] };
+"th12-upgrade-priority-2026.md": {
+	id: "th12-upgrade-priority-2026.md";
+  slug: "th12-upgrade-priority-2026";
+  body: string;
+  collection: "articles";
+  data: InferEntrySchema<"articles">
+} & { render(): Render[".md"] };
+"th13-attack-guide-2026.md": {
+	id: "th13-attack-guide-2026.md";
+  slug: "th13-attack-guide-2026";
   body: string;
   collection: "articles";
   data: InferEntrySchema<"articles">
