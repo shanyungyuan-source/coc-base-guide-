@@ -904,3 +904,70 @@ main { flex: 1; }
 
 /* AdSense ad units */
 .ad-unit { margin: 1.75rem 0; min-height: 90px; }
+
+/* ── Card cover image ── */
+.card-cover {
+  position: relative;
+  overflow: hidden;
+}
+.card-cover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--cover-color, #07111f) 35%, transparent 90%);
+  z-index: 1;
+  pointer-events: none;
+}
+.card-cover-img {
+  position: absolute;
+  right: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 115%;
+  width: auto;
+  object-fit: contain;
+  z-index: 0;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6));
+}
+.card-cover .card-icon { position: relative; z-index: 2; }
+
+/* Per-theme cover-color for gradient overlay */
+.theme-attack  { --cover-color: #2a0808; }
+.theme-defense { --cover-color: #0d0928; }
+.theme-hero    { --cover-color: #071a0f; }
+.theme-clan    { --cover-color: #1a0928; }
+.theme-tips    { --cover-color: #1a1205; }
+.theme-th      { --cover-color: #061525; }
+
+/* ── Article hero banner image ── */
+.article-hero {
+  position: relative;
+  overflow: hidden;
+}
+.article-hero-character {
+  position: absolute;
+  right: max(3%, calc(50% - 580px));
+  bottom: 0;
+  height: 130%;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 24px rgba(0,0,0,0.7));
+  z-index: 1;
+  pointer-events: none;
+}
+.article-hero-content { position: relative; z-index: 2; }
+.article-hero-bg      { position: absolute; inset: 0; z-index: 0; }
+
+@media (max-width: 640px) {
+  .article-hero-character { height: 90%; opacity: 0.35; right: 0; }
+}
+
+/* Supercell attribution notice */
+.supercell-notice {
+  text-align: center;
+  font-size: 0.72rem;
+  color: #4a5568;
+  padding: 0.5rem 1rem 1rem;
+  margin: 0;
+}
+.supercell-notice a { color: #4a6080; text-decoration: underline; }

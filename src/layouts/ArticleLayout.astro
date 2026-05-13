@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import type { CollectionEntry } from 'astro:content';
+import { getArticleImage } from '../lib/articleImage';
 
 interface TocHeading { depth: number; slug: string; text: string; }
 
@@ -62,6 +63,7 @@ function getBannerTheme(tags: string[], title: string) {
 }
 
 const { gradient, icon, accent } = getBannerTheme(tags, title);
+const characterImg = getArticleImage(slug, tags);
 
 function getCardTheme(tags: string[], title: string) {
   const t = [...tags.map(s => s.toLowerCase()), title.toLowerCase()].join(' ');
@@ -114,7 +116,13 @@ function getCardTheme(tags: string[], title: string) {
       <!-- Hero Banner -->
       <div class="article-hero">
         <div class="article-hero-bg" style={`background: ${gradient};`}></div>
-        <span class="article-hero-icon">{icon}</span>
+        <img
+          src={characterImg}
+          alt=""
+          class="article-hero-character"
+          loading="eager"
+          aria-hidden="true"
+        />
         <div class="article-hero-content">
           <div class="breadcrumb">
             <a href="/">Home</a>
@@ -177,7 +185,8 @@ function getCardTheme(tags: string[], title: string) {
                     return (
                       <a href={`/articles/${a.slug}`} class="related-card">
                         <div class={`related-cover ${theme}`}>
-                          <span>{ci}</span>
+                          <img src={getArticleImage(a.slug, a.data.tags ?? [])} alt="" class="card-cover-img" loading="lazy" aria-hidden="true" />
+                          <span style="position:relative;z-index:2">{ci}</span>
                         </div>
                         <div class="related-body">
                           <div class="related-card-title">{a.data.title}</div>
