@@ -1,7 +1,7 @@
 ---
 title: "Best TH9 Base Layouts for 2026: War, Farming & Trophy Strategies"
 description: "The complete guide to TH9 base design in 2026, covering anti-Hog war bases, Dark Elixir farming layouts, and the most common mistakes to avoid."
-date: 2026-01-10
+date: 2026-01-17
 tags: ["TH9", "War Base", "Farming Base", "Defense"]
 ---
 

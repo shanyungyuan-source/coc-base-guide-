@@ -1,7 +1,7 @@
 ---
 title: "Best TH7 Base Layouts for 2026: War, Farming & Trophy Strategies"
 description: "The complete TH7 base guide for 2026 — anti-Dragon war bases, Dark Elixir farming layouts, and the key design principles every TH7 player needs."
-date: 2026-01-07
+date: 2026-01-08
 tags: ["TH7", "War Base", "Farming Base", "Defense"]
 ---
 

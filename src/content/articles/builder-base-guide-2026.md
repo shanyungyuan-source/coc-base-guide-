@@ -1,7 +1,7 @@
 ---
 title: "Builder Base Complete Guide 2026: BH9 and BH10 Tips"
 description: "Everything you need to know about the Builder Base in 2026 — how it works, best attack strategies, upgrade priorities for BH9 and BH10, and how to earn the most Builder Gold."
-date: 2026-05-12
+date: 2026-04-05
 tags: ["Builder Base", "BH10", "BH9", "Builder Hall"]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "COC Hero Upgrade Order Guide 2026: Which Hero to Max First?"
 description: "The definitive hero upgrade priority guide for Clash of Clans 2026. Learn which hero to upgrade first at every Town Hall level and why."
-date: 2026-02-03
+date: 2026-02-18
 tags: ["Hero Upgrade", "Dark Elixir", "Barbarian King", "Archer Queen"]
 ---
 

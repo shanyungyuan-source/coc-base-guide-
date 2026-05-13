@@ -1,7 +1,7 @@
 ---
 title: "Super Troops Guide 2026: Every Super Troop Ranked and Explained"
 description: "Complete guide to all Super Troops in Clash of Clans 2026. Learn which Super Troops are worth boosting, the best combinations, and how to use them in both attack and defense."
-date: 2026-05-10
+date: 2026-04-11
 tags: ["Super Troops", "Super Witch", "Root Rider", "Attack Strategies"]
 ---
 

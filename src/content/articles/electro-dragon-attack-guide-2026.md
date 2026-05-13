@@ -1,7 +1,7 @@
 ---
 title: "Electro Dragon Attack Guide 2026: Hydra Strategy and Spell Loadouts"
 description: "Master Electro Dragon attacks in 2026. Covers Hydra strategy, Lightning Spell combos, best spell loadouts, and how to 3-star TH10-TH13 bases with EDrags."
-date: 2026-05-12
+date: 2026-04-19
 tags: ["Electro Dragon", "Hydra", "TH10", "TH11", "Air Attack"]
 ---
 

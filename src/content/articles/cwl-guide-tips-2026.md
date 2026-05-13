@@ -1,7 +1,7 @@
 ---
 title: "Clan War League Guide 2026: Tips to Win CWL and Earn More Medals"
 description: "Master Clan War League in 2026. Learn how CWL works, how to maximize your star count, the best attack strategies for each day, and how to earn the most medals every season."
-date: 2026-05-05
+date: 2026-03-27
 tags: ["CWL", "Clan War League", "War Tips", "Medals"]
 ---
 

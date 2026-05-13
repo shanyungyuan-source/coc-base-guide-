@@ -1,7 +1,7 @@
 ---
 title: "TH14 Attack Guide 2026: Best Strategies with Hero Equipment"
 description: "Complete TH14 attack guide for 2026. Covers Root Rider Super Witch, Hydra, and Queen Charge strategies with hero equipment setups, spell loadouts, and execution tips."
-date: 2026-05-02
+date: 2026-04-14
 tags: ["TH14", "Attack Guide", "Hero Equipment", "Root Rider"]
 ---
 

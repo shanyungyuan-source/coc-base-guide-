@@ -1,7 +1,7 @@
 ---
 title: "Best COC Attack Strategies 2026: Meta Tier List for Every TH"
 description: "The definitive Clash of Clans attack strategy tier list for 2026. Best army compositions ranked by effectiveness for every Town Hall level from TH7 to TH16."
-date: 2026-02-05
+date: 2026-03-17
 tags: ["Attack Strategy", "Meta", "Tier List", "2026"]
 ---
 

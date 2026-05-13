@@ -1,7 +1,7 @@
 ---
 title: "Clan Capital Guide 2026: How to Raid, Upgrade, and Earn Capital Gold"
 description: "Complete Clan Capital guide for 2026. Learn how Raid Weekends work, the best districts to upgrade first, how to maximize Capital Gold earnings, and top attack strategies."
-date: 2026-05-12
+date: 2026-05-05
 tags: ["Clan Capital", "Raid Weekend", "Capital Gold", "Clan"]
 ---
 

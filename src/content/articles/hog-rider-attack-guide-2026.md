@@ -1,7 +1,7 @@
 ---
 title: "Hog Rider Attack Guide 2026: Mass Hogs and Super Hog Strategies"
 description: "Master Hog Rider attacks in 2026. Covers Mass Hog strategy, Super Hog Rider combinations, spell loadouts, trap management, and how to 3-star with Hogs at TH9-TH12."
-date: 2026-05-12
+date: 2026-04-23
 tags: ["Hog Rider", "Mass Hogs", "TH9", "TH10", "Attack Strategy"]
 ---
 

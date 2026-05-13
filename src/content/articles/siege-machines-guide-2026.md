@@ -1,7 +1,7 @@
 ---
 title: "Best Siege Machines in COC 2026: Which One to Use and When"
 description: "Complete guide to all COC Siege Machines in 2026. Ranked by effectiveness, with ideal pairings for every major attack strategy — Wall Wrecker, Log Launcher, Stone Slammer, Battle Blimp, and more."
-date: 2026-05-12
+date: 2026-04-08
 tags: ["Siege Machines", "Wall Wrecker", "Log Launcher", "Battle Blimp", "Attack Tips"]
 ---
 

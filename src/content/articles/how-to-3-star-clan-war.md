@@ -1,7 +1,7 @@
 ---
 title: "How to 3-Star in Clan War: A Complete Guide for 2026"
 description: "Learn how to consistently 3-star in Clash of Clans Clan War with proven attack frameworks, scouting techniques, and spell timing strategies."
-date: 2026-02-04
+date: 2026-02-26
 tags: ["Clan War", "Attack Strategy", "3-Star", "War Tips"]
 ---
 

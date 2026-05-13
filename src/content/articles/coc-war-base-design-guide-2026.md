@@ -1,7 +1,7 @@
 ---
 title: "How to Design a War Base in COC 2026: Principles That Actually Work"
 description: "Learn how to build an effective COC war base in 2026. Covers anti-3-star design principles, compartment theory, trap placement, and how to counter the current meta attacks."
-date: 2026-05-08
+date: 2026-04-16
 tags: ["War Base", "Base Design", "Defense", "Anti-3-Star"]
 ---
 

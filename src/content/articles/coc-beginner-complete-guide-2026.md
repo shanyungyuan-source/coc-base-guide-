@@ -1,7 +1,7 @@
 ---
 title: "Complete Beginner's Guide to Clash of Clans 2026"
 description: "New to Clash of Clans? This complete beginner guide covers everything you need to know — resources, builders, heroes, attacks, defense, and how to progress without wasting time."
-date: 2026-05-04
+date: 2026-02-14
 tags: ["Beginner", "Getting Started", "COC Basics", "New Player"]
 ---
 

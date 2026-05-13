@@ -1,7 +1,7 @@
 ---
 title: "TH15 Upgrade Priority Guide 2026: What to Upgrade First"
 description: "Optimal TH15 upgrade order for 2026. Covers Druid hero introduction, Spell Tower defense, hero equipment priorities, and the fastest path to war-ready TH15."
-date: 2026-05-12
+date: 2026-05-13
 tags: ["TH15", "Upgrade Guide", "Druid", "Spell Tower"]
 ---
 

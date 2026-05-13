@@ -1,7 +1,7 @@
 ---
 title: "TH12 Attack Guide 2026: Yeti Smash, Super Witch, and Hybrid Strategies"
 description: "Complete TH12 attack guide for 2026 covering Yeti Smash execution, Super Witch army setups, and Queen Walk hybrid strategies for Clan War."
-date: 2026-02-02
+date: 2026-03-10
 tags: ["TH12", "Attack Strategy", "Yeti Smash", "Super Witch"]
 ---
 

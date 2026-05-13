@@ -1,7 +1,7 @@
 ---
 title: "Trophy Pushing Guide 2026: How to Climb from Gold to Legend League"
 description: "Step-by-step trophy pushing guide for 2026. Learn how to climb trophy leagues efficiently, the best pushing armies at each stage, and how to reach Legend League from any starting point."
-date: 2026-05-12
+date: 2026-04-29
 tags: ["Trophy Pushing", "Legend League", "Leagues", "Trophies"]
 ---
 

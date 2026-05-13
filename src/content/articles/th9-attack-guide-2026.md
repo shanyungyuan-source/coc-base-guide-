@@ -1,7 +1,7 @@
 ---
 title: "TH9 Attack Guide 2026: Best Army Compositions and Strategies"
 description: "Master TH9 attacks in 2026 with LaLoon, GoWiPe, and Queen Walk strategies. Step-by-step breakdowns for war and multiplayer battles."
-date: 2026-02-01
+date: 2026-02-23
 tags: ["TH9", "Attack Strategy", "LaLoon", "GoWiPe"]
 ---
 

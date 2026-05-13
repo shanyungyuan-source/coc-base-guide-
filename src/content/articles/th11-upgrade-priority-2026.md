@@ -1,7 +1,7 @@
 ---
 title: "TH11 Upgrade Priority Guide 2026: What to Build First"
 description: "Optimal TH11 upgrade order for 2026. Covers Grand Warden leveling, Eagle Artillery, Builder Hall introduction, and the fastest path to war-ready TH11 with maxed heroes."
-date: 2026-05-09
+date: 2026-03-07
 tags: ["TH11", "Upgrade Guide", "Grand Warden", "Eagle Artillery"]
 ---
 

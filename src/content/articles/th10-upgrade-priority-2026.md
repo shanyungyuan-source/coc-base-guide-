@@ -1,7 +1,7 @@
 ---
 title: "TH10 Upgrade Priority Guide 2026: What to Upgrade First"
 description: "The complete TH10 upgrade priority guide for 2026. Learn the optimal order to upgrade defenses, heroes, troops, and walls to maximize your war and farming performance."
-date: 2026-02-09
+date: 2026-03-04
 tags: ["TH10", "Upgrade Guide", "Dark Elixir", "Hero Upgrade"]
 ---
 

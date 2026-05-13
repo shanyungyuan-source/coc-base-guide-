@@ -1,7 +1,7 @@
 ---
 title: "Best TH8 Base Layouts for 2026: War, Farming & Trophy Strategies"
 description: "Master TH8 base design in 2026 with anti-GoWiPe war layouts, Hog Rider trap setups, and Dark Elixir farming strategies for faster hero upgrades."
-date: 2026-01-08
+date: 2026-01-13
 tags: ["TH8", "War Base", "Farming Base", "Defense"]
 ---
 

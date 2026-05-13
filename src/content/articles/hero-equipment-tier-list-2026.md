@@ -1,7 +1,7 @@
 ---
 title: "COC Hero Equipment Tier List 2026: Best Equipment for Every Hero"
 description: "Complete Clash of Clans Hero Equipment tier list for 2026. The best equipment for Barbarian King, Archer Queen, Grand Warden, and Royal Champion ranked by effectiveness."
-date: 2026-02-08
+date: 2026-02-20
 tags: ["Hero Equipment", "TH14", "Tier List", "Legendary Equipment"]
 ---
 

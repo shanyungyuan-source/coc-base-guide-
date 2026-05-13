@@ -176,6 +176,13 @@ declare module 'astro:content' {
   collection: "articles";
   data: InferEntrySchema<"articles">
 } & { render(): Render[".md"] };
+"coc-base-copy-guide-2026.md": {
+	id: "coc-base-copy-guide-2026.md";
+  slug: "coc-base-copy-guide-2026";
+  body: string;
+  collection: "articles";
+  data: InferEntrySchema<"articles">
+} & { render(): Render[".md"] };
 "coc-beginner-complete-guide-2026.md": {
 	id: "coc-beginner-complete-guide-2026.md";
   slug: "coc-beginner-complete-guide-2026";
@@ -204,6 +211,13 @@ declare module 'astro:content' {
   collection: "articles";
   data: InferEntrySchema<"articles">
 } & { render(): Render[".md"] };
+"coc-spell-guide-2026.md": {
+	id: "coc-spell-guide-2026.md";
+  slug: "coc-spell-guide-2026";
+  body: string;
+  collection: "articles";
+  data: InferEntrySchema<"articles">
+} & { render(): Render[".md"] };
 "coc-war-base-design-guide-2026.md": {
 	id: "coc-war-base-design-guide-2026.md";
   slug: "coc-war-base-design-guide-2026";
@@ -214,6 +228,13 @@ declare module 'astro:content' {
 "cwl-guide-tips-2026.md": {
 	id: "cwl-guide-tips-2026.md";
   slug: "cwl-guide-tips-2026";
+  body: string;
+  collection: "articles";
+  data: InferEntrySchema<"articles">
+} & { render(): Render[".md"] };
+"druid-hero-guide-2026.md": {
+	id: "druid-hero-guide-2026.md";
+  slug: "druid-hero-guide-2026";
   body: string;
   collection: "articles";
   data: InferEntrySchema<"articles">
@@ -410,6 +431,13 @@ declare module 'astro:content' {
 "th16-trophy-base.md": {
 	id: "th16-trophy-base.md";
   slug: "th16-trophy-base";
+  body: string;
+  collection: "articles";
+  data: InferEntrySchema<"articles">
+} & { render(): Render[".md"] };
+"th16-upgrade-priority-2026.md": {
+	id: "th16-upgrade-priority-2026.md";
+  slug: "th16-upgrade-priority-2026";
   body: string;
   collection: "articles";
   data: InferEntrySchema<"articles">

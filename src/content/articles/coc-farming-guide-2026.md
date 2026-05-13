@@ -1,7 +1,7 @@
 ---
 title: "COC Farming Guide 2026: Fastest Way to Get Gold, Elixir, and Dark Elixir"
 description: "The most efficient farming strategies in Clash of Clans 2026. Learn which leagues to farm, the best farming armies, optimal raid targets, and how to maximize Dark Elixir collection."
-date: 2026-05-06
+date: 2026-04-02
 tags: ["Farming", "Resources", "Dark Elixir", "Gold", "Progress Tips"]
 ---
 

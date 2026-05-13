@@ -1,7 +1,7 @@
 ---
 title: "TH14 Upgrade Priority Guide 2026: What to Upgrade First"
 description: "Optimal TH14 upgrade order for 2026. Covers hero equipment introduction, Monolith defense, Druid hero unlock path, and the fastest route to war-ready TH14."
-date: 2026-05-12
+date: 2026-04-26
 tags: ["TH14", "Upgrade Guide", "Hero Equipment", "Monolith"]
 ---
 

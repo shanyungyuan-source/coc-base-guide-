@@ -1,7 +1,7 @@
 ---
 title: "TH11 Attack Guide 2026: Best Strategies to 3-Star Any Base"
 description: "Master TH11 attacks in 2026. Covers the top strategies — Super Witch Smash, Yeti Smash, and Queen Walk Hydra — with troop compositions, spell loadouts, and step-by-step execution."
-date: 2026-05-01
+date: 2026-03-30
 tags: ["TH11", "Attack Guide", "3-Star", "Queen Walk"]
 ---
 

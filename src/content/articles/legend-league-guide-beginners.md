@@ -1,7 +1,7 @@
 ---
 title: "Legend League Guide for Beginners 2026: How to Qualify and Compete"
 description: "Everything you need to know about Legend League in Clash of Clans — how to qualify, how the system works, and the best strategies to climb and hold trophies."
-date: 2026-02-06
+date: 2026-03-24
 tags: ["Legend League", "Trophy Pushing", "TH12", "Competitive"]
 ---
 

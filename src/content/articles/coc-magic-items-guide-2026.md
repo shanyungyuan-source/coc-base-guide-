@@ -1,7 +1,7 @@
 ---
 title: "COC Magic Items Guide 2026: How to Use Books, Runes, and Potions"
 description: "Complete guide to Clash of Clans magic items in 2026. Learn when and how to use Builder Potions, Research Potions, Hero Books, Runes, and Training Potions to maximize your progress."
-date: 2026-05-03
+date: 2026-03-20
 tags: ["Magic Items", "Builder Potion", "Hero Book", "Progress Tips"]
 ---
 

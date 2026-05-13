@@ -1,7 +1,7 @@
 ---
 title: "TH16 Attack Guide 2026: How to 3-Star the Hardest Bases"
 description: "Complete TH16 attack guide for 2026. Master Root Rider Super Witch, Super Dragon Zap, and precision Queen Charge strategies to 3-star TH16 anti-3-star war bases."
-date: 2026-05-07
+date: 2026-05-09
 tags: ["TH16", "Attack Guide", "Root Rider", "Super Witch", "Max TH"]
 ---
 

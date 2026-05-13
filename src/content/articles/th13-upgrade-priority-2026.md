@@ -1,7 +1,7 @@
 ---
 title: "TH13 Upgrade Priority Guide 2026: What to Build and Upgrade First"
 description: "Optimal TH13 upgrade order for 2026. Covers Scattershot setup, Royal Champion leveling, hero equipment introduction, and the fastest path to war-ready TH13."
-date: 2026-02-10
+date: 2026-03-13
 tags: ["TH13", "Upgrade Guide", "Royal Champion", "Scattershot"]
 ---
 

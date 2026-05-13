@@ -1,7 +1,7 @@
 ---
 title: "Best Clan Castle Troops for Defense 2026: Complete Guide"
 description: "The best Clan Castle defensive troops in Clash of Clans 2026 for every Town Hall level. What to request, how CC troops work, and top combinations that stop attacks cold."
-date: 2026-02-07
+date: 2026-03-01
 tags: ["Clan Castle", "Defense", "War Tips", "CC Troops"]
 ---
 
