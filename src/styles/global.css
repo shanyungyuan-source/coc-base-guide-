@@ -391,12 +391,14 @@ main { flex: 1; }
   margin: 0 auto;
 }
 
-/* Article hero banner */
+/* Article hero banner — grid layout, text and image in separate columns */
 .article-hero {
   position: relative;
-  height: 220px;
-  display: flex;
-  align-items: flex-end;
+  min-height: 200px;
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  grid-template-rows: 1fr;
+  align-items: end;
   overflow: hidden;
   margin-bottom: 2rem;
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
@@ -405,35 +407,34 @@ main { flex: 1; }
 .article-hero-bg {
   position: absolute;
   inset: 0;
+  z-index: 0;
 }
 
 .article-hero-bg::after {
   content: '';
   position: absolute;
   inset: 0;
-  /* vertical fade to bg + horizontal fade to protect text from image */
-  background:
-    linear-gradient(to right, rgba(10,22,40,0.95) 0%, rgba(10,22,40,0.85) 55%, transparent 78%),
-    linear-gradient(180deg, transparent 0%, rgba(10,22,40,0.6) 70%, var(--bg) 100%);
-}
-
-.article-hero-icon {
-  position: absolute;
-  right: 2rem;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 7rem;
-  line-height: 1;
-  opacity: 0.25;
-  filter: blur(1px);
+  background: linear-gradient(180deg, transparent 0%, rgba(10,22,40,0.75) 60%, var(--bg) 100%);
 }
 
 .article-hero-content {
   position: relative;
   z-index: 2;
+  grid-column: 1;
   padding: 1.5rem 2rem;
-  width: 100%;
-  max-width: 62%;
+}
+
+/* Right column: fixed-width image slot */
+.article-hero-img-col {
+  grid-column: 2;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+  height: 100%;
+  min-height: 200px;
 }
 
 .article-hero .breadcrumb {
@@ -943,27 +944,22 @@ main { flex: 1; }
 .theme-tips    { --cover-color: #1a1205; }
 .theme-th      { --cover-color: #061525; }
 
-/* ── Article hero banner image ── */
+/* Character image inside its dedicated column */
 .article-hero-character {
-  position: absolute;
-  right: max(2%, calc(50% - 540px));
-  bottom: 0;
-  height: 108%;
+  display: block;
   width: auto;
-  max-width: 38%;
+  height: 100%;
+  max-height: 220px;
   object-fit: contain;
-  filter: drop-shadow(0 4px 24px rgba(0,0,0,0.8));
-  z-index: 1;
+  object-position: bottom center;
+  filter: drop-shadow(0 4px 20px rgba(0,0,0,0.7));
   pointer-events: none;
 }
 
-@media (max-width: 900px) {
-  .article-hero-content { max-width: 100%; padding-right: 36%; }
-  .article-hero-character { height: 100%; max-width: 40%; }
-}
-@media (max-width: 640px) {
-  .article-hero-content { max-width: 100%; padding-right: 1rem; }
-  .article-hero-character { height: 80%; max-width: 45%; opacity: 0.3; right: 0; }
+@media (max-width: 700px) {
+  /* Stack: image column hidden on small screens, text goes full width */
+  .article-hero { grid-template-columns: 1fr; }
+  .article-hero-img-col { display: none; }
 }
 
 /* Supercell attribution notice */

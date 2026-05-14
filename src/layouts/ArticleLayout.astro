@@ -116,13 +116,6 @@ function getCardTheme(tags: string[], title: string) {
       <!-- Hero Banner -->
       <div class="article-hero">
         <div class="article-hero-bg" style={`background: ${gradient};`}></div>
-        <img
-          src={characterImg}
-          alt=""
-          class="article-hero-character"
-          loading="eager"
-          aria-hidden="true"
-        />
         <div class="article-hero-content">
           <div class="breadcrumb">
             <a href="/">Home</a>
@@ -130,6 +123,16 @@ function getCardTheme(tags: string[], title: string) {
             <span>{tags[0] ?? 'Guide'}</span>
           </div>
           <h1 class="article-title">{title}</h1>
+        </div>
+        <div class="article-hero-img-col">
+          <img
+            src={characterImg}
+            alt=""
+            class="article-hero-character"
+            loading="eager"
+            decoding="async"
+            aria-hidden="true"
+          />
         </div>
       </div>
 
