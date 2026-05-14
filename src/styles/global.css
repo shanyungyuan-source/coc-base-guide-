@@ -300,7 +300,12 @@ main { flex: 1; }
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 40%, var(--bg-card) 100%);
+  /* horizontal: protect left-side icon from image; vertical: fade to card bg */
+  background:
+    linear-gradient(to right, var(--cover-color, #07111f) 30%, transparent 75%),
+    linear-gradient(180deg, transparent 40%, var(--bg-card) 100%);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .card-cover-icon {
@@ -427,13 +432,9 @@ main { flex: 1; }
 /* Right column: fixed-width image slot */
 .article-hero-img-col {
   grid-column: 2;
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  overflow: hidden;
-  height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom center;
   min-height: 200px;
 }
 
@@ -911,18 +912,7 @@ main { flex: 1; }
 .ad-unit { margin: 1.75rem 0; min-height: 90px; }
 
 /* ── Card cover image ── */
-.card-cover {
-  position: relative;
-  overflow: hidden;
-}
-.card-cover::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to right, var(--cover-color, #07111f) 35%, transparent 90%);
-  z-index: 1;
-  pointer-events: none;
-}
+/* card-cover-img: absolute right, behind gradient overlay */
 .card-cover-img {
   position: absolute;
   right: -4px;
@@ -934,7 +924,6 @@ main { flex: 1; }
   z-index: 0;
   filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6));
 }
-.card-cover .card-icon { position: relative; z-index: 2; }
 
 /* Per-theme cover-color for gradient overlay */
 .theme-attack  { --cover-color: #2a0808; }
@@ -944,20 +933,16 @@ main { flex: 1; }
 .theme-tips    { --cover-color: #1a1205; }
 .theme-th      { --cover-color: #061525; }
 
-/* Character image inside its dedicated column */
-.article-hero-character {
-  display: block;
-  width: auto;
-  height: 100%;
-  max-height: 220px;
-  object-fit: contain;
-  object-position: bottom center;
-  filter: drop-shadow(0 4px 20px rgba(0,0,0,0.7));
-  pointer-events: none;
+/* Card image: fade in after load so there's no hard pop */
+.card-cover-img {
+  animation: imgFadeIn 0.25s ease both;
+}
+@keyframes imgFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 @media (max-width: 700px) {
-  /* Stack: image column hidden on small screens, text goes full width */
   .article-hero { grid-template-columns: 1fr; }
   .article-hero-img-col { display: none; }
 }

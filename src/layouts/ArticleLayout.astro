@@ -124,16 +124,11 @@ function getCardTheme(tags: string[], title: string) {
           </div>
           <h1 class="article-title">{title}</h1>
         </div>
-        <div class="article-hero-img-col">
-          <img
-            src={characterImg}
-            alt=""
-            class="article-hero-character"
-            loading="eager"
-            decoding="async"
-            aria-hidden="true"
-          />
-        </div>
+        <div
+          class="article-hero-img-col"
+          style={`background-image: url('${characterImg}');`}
+          aria-hidden="true"
+        ></div>
       </div>
 
       <div class="container">
